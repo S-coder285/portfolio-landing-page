@@ -10,7 +10,8 @@
         <header>
             <h1>Welcome to My Portfolio</h1>
             <nav>
-                <ul>
+                <div class="menu-toggle" onclick="toggleMenu()">Ξ</div>
+                <ul id="menu">
                     <li><a href="#about">About</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#contact">Contact</a></li>
@@ -36,5 +37,36 @@
         <footer>
             <p>© 2025 Samuel. All Rights Reserved.</p>
         </footer>
+
+        <script>
+            // Add Animations and Effects
+            document.addEventListener("DOMContentLoaded", function () {
+                const sections = document.querySelectorAll("section");
+
+                const options = {
+                    threshold: 0.2, // When 20% of section is visible
+                }
+
+                const observer = new IntersectionObserver(function (entries, observer) {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("fade-in");
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, options);
+
+                sections.forEach(section => {
+                    sections.classList.add("fade");
+                    observer.observe(section);
+                });
+            });
+
+            // Mobile Friendly Hamburger Menu
+            function toggleMenu() {
+                const menu = document.getElementById("menu");
+                menu.classList.toggle("active");
+            }
+        </script>
     </body>
 </html>
